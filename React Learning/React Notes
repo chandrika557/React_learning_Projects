@@ -1,0 +1,937 @@
+//Notes:
+
+//More advance topics React Router Redux
+//we are using react with web so we we use react-dom <script src="https://unpkg.com/react-dom@16.13.1/umd/react-dom.development.js"></script>
+
+//JSX - JavaScript XML extension to javascript. 
+// It is a syntax extension to JavaScript that allows us to write HTML-like code in our JavaScript files. 
+// It is used in React to create components and render them to the DOM. JSX is not a valid JavaScript code,
+//  it needs to be transpiled to JavaScript using a tool like Babel before it can be executed in the browser.
+
+
+var template = <p>This is JSX from app.js!</p>; //to solve this extension problem we need to use babel.
+//  Babel is a JavaScript compiler that allows us to write modern JavaScript code and transpile it to older versions of JavaScript that are compatible with all browsers. 
+// It also allows us to use JSX syntax in our JavaScript files and transpile it to regular JavaScript that can be executed in the browser. We can include Babel in our project by adding a script tag in our HTML file that points to the Babel CDN,
+//  like this: <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>. Once we have Babel set up, we can write our JSX code in our JavaScript files and it will be transpiled to regular JavaScript when we run our application.
+
+<body>
+        This is my first React app.
+        <div id="app"></div>
+        <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+        <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script> //loaded react and react-dom from CDN companinion library
+        <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script> //loaded babel compiler to convert JSX code to JavaScript code.
+        <script src="/scripts/app.js"></script> //loaded script under which we have created app.js file and written our code.
+    </body>
+
+    var template = <div><h1>Indecision App</h1><p>This is some info</p></div>; // single root element is required in JSX. We can use div as root element or we can use React.Fragment as root element. React.Fragment is a special component that allows us to group a list of children without adding extra nodes to the DOM. We can also use empty tags <> </> as root element.
+
+    //JSX - JavaScript XML extension to javascript. 
+var template = (
+    <div>
+        <h1>Indecision App</h1>
+        <p>This is some info</p>
+        <ol>
+            <li>Item one</li>
+            <li>Item two</li>
+        </ol>
+    </div>
+); // single root element is required in JSX. 
+//==========
+//task 1
+// create a template two var jsx expression
+//div
+// h1 -> name
+// p -> age
+// p -> location:
+// Render template two instead of template
+// static defined values
+// var templateTwo = (
+//     <div>
+//         <h1>Jaya Chandrika</h1>   
+//         <p>Age: 22</p>
+//         <p>Location: Hyderabad</p>
+//     </div>
+// );
+
+        <h1>{user.name ? user.name : 'Anonymous'}</h1>   // conditional rendering using ternary operator 
+
+            <button onClick={addOne}>+1</button> //onClick event handler to call addOne function when button is clicked
+
+           /arrays are rendered by mapping over them and returning a new array of JSX elements, we also need to set a unique key for each element in the array to help React identify which items have changed, are added, or are removed
+            <ol>
+                {/* map over app.options getting back an array of lis (set key and test) */}
+                {app.options.map((option) => <li key={option}>{option}=</li>)
+                }
+            </ol> 
+
+
+            ////
+            // const obj = { //creating an object literal named obj with a property name and a method getName
+//     name: 'Jaya',
+//     getName() { //method to return the name property of the obj object, it uses the 'this' keyword to refer to the current object (obj) and access its name property
+//         return this.name;
+//     }
+// };
+
+// const getName = obj.getName.bind({ name: 'Jaya' }); //assigning the getName method of the obj object to a new variable getName, which will lose the context of the obj object when called
+
+// console.log(obj.getName());
+
+// const obj = { //creating an object literal named obj with a property name and a method getName
+//     name: 'Jaya',
+//     getName() { //method to return the name property of the obj object, it uses the 'this' keyword to refer to the current object (obj) and access its name property
+//         return this.name;
+//     }
+// };
+
+// const getName = obj.getName.bind({ name: 'Jaya' }); //assigning the getName method of the obj object to a new variable getName, which will lose the context of the obj object when called
+
+// console.log(obj.getName());
+
+class IndecisionApp extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+        options:['Thing one', 'Thing two', 'Thing four']
+    };
+  }
+    render() {
+    const title = 'Indecision'; //local variable title that holds the string 'Indecision'
+    const subtitle = 'Put your life in the hands of a computer';  
+    
+    return(
+        <div>
+            <Header title={title} subtitle={subtitle}/>
+            <Action/>
+            <Options options={this.state.options}/>
+            <AddOption options={this.state.options}/>
+        </div>
+    );
+}
+}
+class Header extends React.Component { //another class component
+  render() { 
+    return (
+      <div>
+        <h1>{this.props.title}</h1>
+        <h2>{this.props.subtitle}</h2>
+      </div>
+    );
+  }
+}
+
+class Action extends React.Component { //component class that will render a button and handle the click event of the button
+    handlePick = () => { //method to handle the button click event, it will be called when the button is clicked
+        alert('handlePick');
+    }
+  render() {
+    return (
+      <div>
+        <button onClick={this.handlePick}>What should I do?</button> // function reference
+      </div>
+    );
+  }
+}
+
+//setup options prop for Options component
+//Render the length of the array
+//option -> options component here
+//render new p tag for each option (set text, set key)
+
+//add remove all button
+//setup handleremovall -> alert some message
+//setup onclick to fire the method
+
+class Options extends React.Component {
+    constructor(props) {
+        super(props);
+        this.handleRemoveAll = this.handleRemoveAll.bind(this); //binding the method
+    }
+    handleRemoveAll = () => {
+        console.log(this.props.options);
+        //alert('handleRemoveAll');
+    }
+    render(){
+        return(
+            <div>
+            <button onClick={this.handleRemoveAll}>Remove All</button>
+            {
+                this.props.options.map((option) => <Option key={option} option={option}/>)
+            }
+            </div>
+        )
+    }
+}
+
+class Option extends React.Component {
+    render(){
+        return(
+            <div>
+                <p>{this.props.option}</p>
+            </div>
+        )
+    }
+}
+
+//1.setup the form with text input and submit button
+//2. wire up onsubmit
+//3. handleAddOption -> fetch the value typed -> if value, alert it and clear the input
+class AddOption extends React.Component {
+    handleAddOption(e) { //method to handle the form submission event, it takes in the event object as an argument
+    e.preventDefault(); //preventing the default behavior of the form submission, which is to refresh the page
+
+    const option = e.target.elements.option.value.trim(); //fetching the value typed in the input field and trimming any whitespace from the beginning and end of the string
+
+    if (option) { //checking if the value is not an empty string after trimming, if it is not empty, then we proceed to alert the value and clear the input field
+      alert(option);
+      e.target.elements.option.value = '';
+    }
+  }
+  render() {
+    return (
+      <div>
+        <form onSubmit={this.handleAddOption}>
+          <input type="text" name="option"/>
+          <button>Add Option</button>
+        </form>
+      </div>
+    );
+  }
+}
+const root = ReactDOM.createRoot(document.getElementById('app'));
+root.render(<IndecisionApp />);
+
+//counter app.jsclass IndecisionApp extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleDeleteOptions = this.handleDeleteOptions.bind(this);
+    this.handlePick = this.handlePick.bind(this);
+    this.handleAddOption = this.handleAddOption.bind(this);
+    this.handleDeleteOption = this.handleDeleteOption.bind(this);
+    this.state = {
+      options: props.options
+    };
+  }
+  handleDeleteOptions() {
+    this.setState(() => ({ options: [] })); //jsx html tag
+  }
+  handleDeleteOption(option) {
+    console.log('hdo',option);
+  }
+  handlePick() { //
+    const randomNum = Math.floor(Math.random() * this.state.options.length);
+    const option = this.state.options[randomNum];
+    alert(option);
+  }
+  handleAddOption(option) {
+    if (!option) {
+      return 'Enter valid value to add item';
+    } else if (this.state.options.indexOf(option) > -1) {
+      return 'This option already exists';
+    }
+
+    this.setState((prevState) => ({
+    options: prevState.options.concat(option)
+}));
+  }
+  render() {
+   
+    const subtitle = 'Put your life in the hands of a computer'; //variable 
+
+    return (
+      <div>
+        <Header subtitle={subtitle} />
+        <Action
+          hasOptions={this.state.options.length > 0}
+          handlePick={this.handlePick}
+          handleDeleteOptions={this.handleDeleteOptions}
+        />
+        <Options
+          options={this.state.options}
+          handleDeleteOptions={this.handleDeleteOptions}
+        />
+        <AddOption
+          handleAddOption={this.handleAddOption}
+        />
+      </div>
+    );
+  }
+}
+
+IndecisionApp.defaultProps = {
+  options: []
+}
+
+
+const Header = ({ title = 'Indecision', subtitle }) => {
+    return (
+      <div>
+        <h1>{title}</h1>
+        {subtitle && <h2>{subtitle}</h2>}
+      </div>
+    );
+}
+//default props
+// Header.defaultProps = {
+//     title:'some deafult'
+// }
+// class Header extends React.Component { 
+//   render() {
+//     return (
+//       <div>
+//         <h1>{this.props.title}</h1>
+//         <h2>{this.props.subtitle}</h2>
+//       </div>
+//     );
+//   }
+// }
+//class based to functional based
+
+const Action =(props) =>{ //functional based component
+    return(
+      <div>
+        <button
+          onClick={props.handlePick}
+          disabled={!props.hasOptions}
+        >
+          What should I do?
+        </button>
+      </div>
+    );
+  };
+// class Action extends React.Component { //class based component
+//   render() {
+//     return (
+//       <div>
+//         <button
+//           onClick={this.props.handlePick}
+//           disabled={!this.props.hasOptions}
+//         >
+//           What should I do?
+//         </button>
+//       </div>
+//     );
+//   }
+// }
+const Options = (props) => {
+    return (
+      <div>
+        <button onClick={props.handleDeleteOptions}>Remove All</button>
+        {
+          props.options.map((option) => 
+          <Option
+           key={option} 
+           optionText={option} 
+           handleDeleteOption={props.handleDeleteOption} />)
+        }
+      </div>
+    );
+
+}
+// class Options extends React.Component { 
+//   render() {
+//     return (
+//       <div>
+//         <button onClick={this.props.handleDeleteOptions}>Remove All</button>
+//         {
+//           this.props.options.map((option) => <Option key={option} optionText={option} />)
+//         }
+//       </div>
+//     );
+//   }
+// }
+
+class Option extends React.Component {
+  render() {
+    return (
+      <div>
+        {props.optionText}
+        <button onClick={props.handleDeleteOption}>remove</button>
+      </div>
+    );
+  }
+}
+
+class AddOption extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleAddOption = this.handleAddOption.bind(this);
+    this.state = {
+      error: undefined
+    };
+  }
+  handleAddOption(e) { 
+    e.preventDefault(); //prevent default form submission
+
+    const option = e.target.elements.option.value.trim();
+    const error = this.props.handleAddOption(option);
+
+    this.setState(() => ({ error }));  
+  }
+  render() {
+    return (
+      <div>
+        {this.state.error && <p>{this.state.error}</p>}
+        <form onSubmit={this.handleAddOption}>
+          <input type="text" name="option" />
+          <button>Add Option</button>
+        </form>
+      </div>
+    );
+  }
+}
+
+const User = (props) => {
+  return (
+    <div>
+      <p>Name: {props.name}</p> 
+      <p>Age:{props.age}</p>
+    </div>
+  );
+};
+const root = ReactDOM.createRoot(document.getElementById('app'));
+root.render(<IndecisionApp options={['option1', 'option2']} />);
+// ReactDOM.render(<IndecisionApp />, document.getElementById('app'));
+
+
+The 3 main lifecycle methods:
+javascript// 1. Component is born - first added to the page
+componentDidMount() {
+    console.log('componentDidMount');
+    // runs ONCE when component first appears on screen
+    // good for: API calls, fetching data, timers, event listeners
+}
+
+// 2. Component updates - state or props changed
+componentDidUpdate(prevProps, prevState) {
+    console.log('componentDidUpdate');
+    // runs every time state or props changes
+    // prevProps = props before update
+    // prevState = state before update
+    // good for: saving data, comparing old vs new values
+}
+
+// 3. Component dies - removed from page
+componentWillUnmount() {
+    console.log('componentWillUnmount');
+    // runs just before component is removed
+    // good for: cleanup, clearing timers, removing listeners
+}
+```
+
+---
+
+**Lifecycle order:**
+```
+Component Created
+      ↓
+constructor()        → sets up state
+      ↓
+render()             → displays UI
+      ↓
+componentDidMount()  → runs after first render
+      ↓
+state/props changes
+      ↓
+render()             → re-renders UI
+      ↓
+componentDidUpdate() → runs after every update
+      ↓
+component removed
+      ↓
+componentWillUnmount() → cleanup
+
+16/3/2026
+//import './utils.js' //loads imports first 
+// import subtract, {square, add} from './utils.js' // for default we need to insert before calling
+// console.log('app.js is running!')
+// console.log(square(5))
+// console.log(add(1,9))
+// console.log(subtract(90,60))
+
+//task 1
+//named export isAdult(18) - true if adult , otherwise false
+//named export canDrink(18) - true if 21 and over, otherwise false
+
+//import isAdult and candrink
+//use both printing result to the console
+// import isSenior,{ isAdult,canDrink } from "./person";  // default isSenior 
+// console.log(isAdult(18));
+// console.log(canDrink(20));
+// console.log(isSenior(64));
+
+//install -> import ->use
+// import validator from 'validator'; // insted of specif path we use module name
+
+// console.log(validator.isEmail('test@gmail.com'));
+import React from 'react';
+import ReactDOM from 'react-dom/client';  
+
+const template = <p>THIS IS JSX FROM WEBPACK</p>;
+
+const root = ReactDOM.createRoot(document.getElementById('app')); //react 17
+root.render(template);  //react 19 
+
+form.jsx implemetation
+
+import React from "react";
+import InputField from "./InputField";
+import "./Form.css";
+
+// ============================================
+// Form - Class Component (PARENT)
+// Has state for all form fields
+// Passes handlers down as props to InputField
+// ============================================
+class Form extends React.Component {
+
+  // state = {} class property syntax
+  // stores all form field values
+  state = {
+    fullName: "",
+    email: "",
+    phone: "",
+    dateOfBirth: "",
+    policyType: "",
+    ownershipType: "",
+    coverageOptions: [],
+    numEmployees: "",
+    businessDescription: "",
+    uploadedFile: null,
+    hasPreviousInsurance: false,
+    errors: {},
+    submitted: false,
+  };
+
+  // Options for dropdowns and lists
+  businessOwnershipTypes = [
+    "Sole Proprietor",
+    "Partnership",
+    "Corporation",
+    "LLC",
+  ];
+
+  coverageOptionsList = [
+    "Property Damage",
+    "Liability Coverage",
+    "Equipment Breakdown",
+    "Cyber Protection",
+  ];
+
+  policyTypeOptions = [
+    { value: "", label: "Select policy type" },
+    { value: "health", label: "Health Insurance" },
+    { value: "auto", label: "Auto Insurance" },
+    { value: "home", label: "Home Insurance" },
+    { value: "life", label: "Life Insurance" },
+    { value: "travel", label: "Travel Insurance" },
+  ];
+
+  // ============================================
+  // Arrow function handlers (class properties)
+  // No bind needed - same as IndecisionApp!
+  // ============================================
+
+  // Handles text/email/tel/date/number/select inputs
+  handleInputChange = (e) => {
+    const { name, value } = e.target;
+    this.setState(() => ({ [name]: value }));
+  };
+
+  // Handles radio button selection
+  handleRadioChange = (e) => {
+    this.setState(() => ({ ownershipType: e.target.value }));
+  };
+
+  // Handles checkboxes - add or remove from array
+  handleCheckboxChange = (e) => {
+    const { value, checked } = e.target;
+    this.setState((prevState) => {
+      if (checked) {
+        // Add to coverage array
+        return {
+          coverageOptions: [...prevState.coverageOptions, value],
+        };
+      } else {
+        // Remove from coverage array
+        return {
+          coverageOptions: prevState.coverageOptions.filter(
+            (opt) => opt !== value
+          ),
+        };
+      }
+    });
+  };
+
+  // Handles file upload
+  handleFileChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      this.setState(() => ({ uploadedFile: file }));
+    }
+  };
+
+  // Handles toggle switch
+  handleToggle = () => {
+    this.setState((prevState) => ({
+      hasPreviousInsurance: !prevState.hasPreviousInsurance,
+    }));
+  };
+
+  // Validates form fields before submit
+  validateForm = () => {
+    const errors = {};
+    const { fullName, email, phone, policyType } = this.state;
+
+    if (!fullName.trim()) errors.fullName = "Full name is required";
+    if (!email.trim()) errors.email = "Email is required";
+    else if (!email.includes("@")) errors.email = "Enter a valid email";
+    if (!phone.trim()) errors.phone = "Phone number is required";
+    if (!policyType) errors.policyType = "Please select a policy type";
+
+    return errors;
+  };
+
+  // Handles form submit - like AddOption in IndecisionApp!
+  handleSubmit = (e) => {
+    e.preventDefault(); // stops page refresh
+
+    const errors = this.validateForm();
+
+    if (Object.keys(errors).length > 0) {
+      this.setState(() => ({ errors }));
+      return;
+    }
+
+    // Save to localStorage on submit
+    localStorage.setItem(
+      "insuranceSubmission",
+      JSON.stringify({
+        fullName: this.state.fullName,
+        email: this.state.email,
+        policyType: this.state.policyType,
+        submittedAt: new Date().toISOString(),
+      })
+    );
+
+    this.setState(() => ({ submitted: true, errors: {} }));
+    console.log("Form submitted!", this.state);
+  };
+
+  // Save draft to localStorage
+  handleSaveDraft = () => {
+    localStorage.setItem(
+      "insuranceDraft",
+      JSON.stringify({
+        fullName: this.state.fullName,
+        email: this.state.email,
+        phone: this.state.phone,
+        policyType: this.state.policyType,
+      })
+    );
+    alert("Draft saved successfully!");
+  };
+
+  // Resets the entire form
+  handleCancel = () => {
+    this.setState(() => ({
+      fullName: "",
+      email: "",
+      phone: "",
+      dateOfBirth: "",
+      policyType: "",
+      ownershipType: "",
+      coverageOptions: [],
+      numEmployees: "",
+      businessDescription: "",
+      uploadedFile: null,
+      hasPreviousInsurance: false,
+      errors: {},
+      submitted: false,
+    }));
+  };
+
+  // Load draft from localStorage when component mounts
+  // same as componentDidMount in IndecisionApp!
+  componentDidMount() {
+    try {
+      const json = localStorage.getItem("insuranceDraft");
+      const draft = JSON.parse(json);
+      if (draft) {
+        this.setState(() => ({
+          fullName: draft.fullName || "",
+          email: draft.email || "",
+          phone: draft.phone || "",
+          policyType: draft.policyType || "",
+        }));
+      }
+    } catch (e) {
+      // do nothing
+    }
+  }
+
+  render() {
+    const {
+      fullName, email, phone, dateOfBirth, policyType,
+      ownershipType, coverageOptions, numEmployees,
+      businessDescription, uploadedFile, hasPreviousInsurance,
+      errors, submitted,
+    } = this.state;
+
+    // Show success screen after submit
+    if (submitted) {
+      return (
+        <div className="form-container success-container">
+          <div className="success-icon">✅</div>
+          <h2 className="success-title">Application Submitted!</h2>
+          <p className="success-msg">
+            Thank you, {fullName}! We'll contact you at {email} shortly.
+          </p>
+          <button className="submit-btn" onClick={this.handleCancel}>
+            Submit Another
+          </button>
+        </div>
+      );
+    }
+
+    return (
+      <form className="form-container" onSubmit={this.handleSubmit}>
+        <h2>Customer Information</h2>
+
+        {/* ---- Personal Details ---- */}
+        <div className="grid-2"> {/*added two inputs side by side*/}
+        <InputField
+          type="text"
+          label="Full Name"
+          id="fullName"
+          name="fullName"
+          placeholder="Enter full name"
+          value={fullName}
+          onChange={this.handleInputChange}
+          error={errors.fullName}
+        />
+
+        <InputField
+          type="email"
+          label="Email Address"
+          id="email"
+          name="email"
+          placeholder="Enter email"
+          value={email}
+          onChange={this.handleInputChange}
+          error={errors.email}
+        />
+        </div>
+
+        <InputField
+          type="tel"
+          label="Phone Number"
+          id="phone"
+          name="phone"
+          placeholder="(555) 123-4567"
+          value={phone}
+          onChange={this.handleInputChange}
+          error={errors.phone}
+        />
+
+        <InputField
+          type="date"
+          label="Date of Birth"
+          id="dateOfBirth"
+          name="dateOfBirth"
+          value={dateOfBirth}
+          onChange={this.handleInputChange}
+        />
+
+        <InputField
+          type="select"
+          label="Policy Type"
+          id="policyType"
+          name="policyType"
+          value={policyType}
+          onChange={this.handleInputChange}
+          options={this.policyTypeOptions}
+          error={errors.policyType}
+        />
+
+        {/* ---- Business Ownership - Radio Buttons ---- */}
+        <label>Business Ownership Type</label>
+        <div className="radio-group">
+          {this.businessOwnershipTypes.map((type, index) => (
+            <label key={index} className="radio-option">
+              <input
+                type="radio"
+                name="ownershipType"
+                value={type}
+                checked={ownershipType === type}
+                onChange={this.handleRadioChange}
+              />
+              {type}
+            </label>
+          ))}
+        </div>
+
+        {/* ---- Coverage Options - Checkboxes ---- */}
+        <label>Coverage Options</label>
+        <div className="checkbox-group">
+          {this.coverageOptionsList.map((option, index) => (
+            <label key={index} className="checkbox-option">
+              <input
+                type="checkbox"
+                value={option}
+                checked={coverageOptions.includes(option)}
+                onChange={this.handleCheckboxChange}
+              />
+              {option}
+            </label>
+          ))}
+        </div>
+
+        {/* ---- Number of Employees ---- */}
+        <InputField
+          type="number"
+          label="Number of Employees"
+          id="numEmployees"
+          name="numEmployees"
+          placeholder="0"
+          value={numEmployees}
+          onChange={this.handleInputChange}
+        />
+
+        {/* ---- Business Description ---- */}
+        <InputField
+          type="textarea"
+          label="Business Description"
+          id="businessDescription"
+          name="businessDescription"
+          placeholder="Describe your business..."
+          value={businessDescription}
+          onChange={this.handleInputChange}
+          rows={4}
+        />
+
+        {/* ---- File Upload ---- */}
+        <div className="form-group">
+          <label htmlFor="documents">Upload Supporting Documents</label>
+          <div className="file-upload-area" onClick={() => document.getElementById('documents').click()}>
+            <p className="upload-icon">⬆</p>
+            <p className="upload-text">Click to upload or drag and drop</p>
+            <p className="upload-hint">PDF, DOC, DOCX (max. 10MB)</p>
+            {uploadedFile && (
+              <p className="upload-success">✅ {uploadedFile.name}</p>
+            )}
+            <input
+              id="documents"
+              type="file"
+              accept=".pdf,.doc,.docx"
+              onChange={this.handleFileChange}
+              style={{ display: "none" }}
+            />
+          </div>
+        </div>
+
+        {/* ---- Previous Insurance Toggle ---- */}
+        <div className="insurance-check">
+          <label>Do you have previous insurance?</label>
+          <div
+            className={hasPreviousInsurance ? "toggle-switch toggle-on" : "toggle-switch"}
+            onClick={this.handleToggle}
+          >
+            <div className="toggle-thumb" />
+          </div>
+        </div>
+
+        <hr />
+
+        {/* ---- Action Buttons ---- */}
+        <div className="form-buttons">
+          <button type="button" className="cancel-btn" onClick={this.handleCancel}>
+            Cancel
+          </button>
+          <button type="button" className="save-draft-btn" onClick={this.handleSaveDraft}>
+            Save Draft
+          </button>
+          <button type="submit" className="submit-btn">
+            Submit
+          </button>
+        </div>
+      </form>
+    );
+  }
+}
+
+export default Form;
+
+
+InputField.jsx implementation
+import React from "react";
+
+// ============================================
+// InputField - Reusable Functional Component
+// Handles: text, email, tel, date, number,
+//          textarea, select, file inputs
+// This is the SMART reusable component!
+// ============================================
+const InputField = (props) => {
+  const {
+    label,
+    type = "text",
+    id,
+    name,
+    placeholder,
+    value,
+    onChange,
+    options = [],
+    rows = 4,
+    error,
+  } = props;
+
+  return (
+    <div className="form-group">
+      <label htmlFor={id}>{label}</label>
+
+      {/* If type is textarea → show textarea */}
+      {type === "textarea" ? (
+        <textarea
+          id={id}
+          name={name}
+          placeholder={placeholder}
+          value={value}
+          onChange={onChange}
+          rows={rows}
+        />
+
+      /* If type is select → show dropdown */
+      ) : type === "select" ? (
+        <select
+          id={id}
+          name={name}
+          value={value}
+          onChange={onChange}
+        >
+          {options.map((option, index) => (
+            <option key={index} value={option.value || option}>
+              {option.label || option}
+            </option>
+          ))}
+        </select>
+
+      /* Otherwise → show normal input */
+      ) : (
+        <input
+          type={type}
+          id={id}
+          name={name}
+          placeholder={placeholder}
+          value={type === "file" ? undefined : value}
+          onChange={onChange}
+        />
+      )}
+
+      {/* Show error message if exists */}
+      {error && <p className="error-msg">{error}</p>}
+    </div>
+  );
+};
+
+export default InputField;

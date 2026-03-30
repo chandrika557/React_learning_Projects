@@ -1,0 +1,57 @@
+//keywords
+var: variable can be re-declared & updated. A global scope variable
+//example: var name = 'John';
+//         var name = 'Doe';  re-declare
+//         var name = 'Smith';  update        
+//         console.log(name);
+//         Output: 'Smith'
+let: variable can be updated but not re-declared. A block scope variable
+//example: let name = 'John';
+//         name = 'Doe';  update
+//         console.log(name); // Output: 'Doe'
+const: variable cannot be updated or re-declared. A block scope variable
+//example: const name = 'John';
+//         name = 'Doe';  // Error: Assignment to constant variable.
+// Data Types
+1. Primitive Data Types: String, Number, Boolean, Null, Undefined, Symbol
+2. Reference Data Types: Object, Array, Function, Date, Map, Set, WeakMap, WeakSet
+// Functions
+1. Function Declaration: function functionName(parameters) { // code }
+2. Function Expression: const functionName = function(parameters) { // code }
+3. Arrow Function: const functionName = (parameters) => { // code }             
+// Control Structures
+1. If-Else Statement: if (condition) { // code } else { // code }
+2. Switch Statement: switch (expression) { case value: // code break; default: // code }
+3. For Loop: for (initialization; condition; increment) { // code }     
+4. While Loop: while (condition) { // code }
+5. Do-While Loop: do { // code } while (condition)
+// Objects
+1. Object Literal: const obj = { key: value, key2: value2 }
+2. Constructor Function: function Person(name, age) { this.name = name; this.age = age; }
+3. Class: class Person { constructor(name, age) { this.name = name; this.age = age; } }
+// Arrays
+1. Array Literal: const arr = [element1, element2, element3]
+2. Array Constructor: const arr = new Array(element1, element2, element3)   
+// ES6 Features ecmascript 2015
+1. Template Literals: const str = `Hello, ${name}!`
+2. Arrow Functions: const sum = (a, b) => a + b         
+3. Destructuring Assignment: const { name, age } = person
+4. Spread Operator: const arr2 = [...arr1, element]
+5. Rest Parameters: function sum(...numbers) { // code }
+6. Promises: const promise = new Promise((resolve, reject) => { // code })
+7. Modules: export const myFunction = () => { // code } and import { my Function } from './module.js'
+// Asynchronous JavaScript
+1. Callbacks: function fetchData(callback) { // code }  
+2. Promises: const promise = new Promise((resolve, reject) => { // code })
+3. Async/Await: async function fetchData() { // code }
+// DOM Manipulation
+1. Selecting Elements: document.getElementById('id'), document.querySelector('.class'), document.querySelectorAll('tag')
+2. Modifying Elements: element.textContent = 'text', element.innerHTML = '<p    >HTML</p>', element.style.color = 'red'
+3. Event Listeners: element.addEventListener('click', function() { // code })       
+// Error Handling
+1. Try-Catch: try { // code } catch (error) { // code }
+2. Throwing Errors: throw new Error('Error message')
+// Miscellaneous
+1. Type Coercion: '5' + 5 // '55', '5' - 5 // 0
+2. Strict Mode: 'use strict'; // code       
+

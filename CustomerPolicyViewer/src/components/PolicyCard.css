@@ -1,0 +1,57 @@
+.policy-card {
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.policy-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.policy-card-header h3 {
+    margin: 0;
+    color: #333;
+}
+
+.status {
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.active {
+    background-color: #e6f4ea;
+    color: #2e7d32;
+}
+
+.expired {
+    background-color: #fce8e6;
+    color: #c62828;
+}
+
+.policy-card-body p {
+    margin: 8px 0;
+    color: #555;
+}
+
+.details-btn {
+    margin-top: 15px;
+    width: 100%;
+    padding: 10px;
+    background-color: #1a73e8;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 15px;
+}
+
+.details-btn:hover {
+    background-color: #1558b0;
+}
